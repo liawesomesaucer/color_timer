@@ -1,0 +1,212 @@
+<DOCTYPE! html>
+
+<html lang="en">
+
+<head>
+	<title>Color Timer</title>
+
+	<style>
+	body {
+		font: 20px/24px Lucida Console, Arial, sans-serif;
+		margin:0;
+		padding:0;
+		padding-top:3%;
+		text-align:center;
+		transition:all 0.5s;
+		background: -webkit-linear-gradient(#000000, #ffffff); /* For Safari 5.1 to 6.0 */
+  		background: -o-linear-gradient(#000000, #ffffff); /* For Opera 11.1 to 12.0 */
+  		background: -moz-linear-gradient(#000000, #ffffff); /* For Firefox 3.6 to 15 */
+  		background: linear-gradient(#000000, #ffffff); /* Standard syntax */
+	}
+	div{
+		margin:0px;
+		padding:0px;
+	}
+	div .header {
+		padding:20px;
+	}
+	div .content {
+		background-color:#000000;
+		height:100%;
+		width:100%;
+	}
+	div #input {
+		margin:auto;
+		font-size:20px;
+	}
+	div #input p {
+		display:inline;
+	}
+	input {
+		font-size:16px;
+		width:30;
+	}
+	a{
+		color:#000000;
+		font-size:18px;
+		text-decoration:none;
+		border-style:solid;
+		border-width:1px;
+		padding:2px;
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+	a:hover {
+		background-color: rgba(255, 255, 255, 1);
+	}
+	a:visited {
+		color:#000000;
+	}
+	div #top {
+		width:50%;
+		margin:auto;
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+	div #bottom {
+		width:50%;
+		margin:auto;
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+	div #center {
+		width:100%;
+		background-color:rgba(255, 255, 255, 0.4);
+		padding-bottom:30px;
+		padding-top:-10px;
+	}
+	</style>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+	<script>
+
+		var bottom_color = '#ffffff'
+
+		//alert('#' + cur_hour + cur_min + cur_sec);
+
+		function cur_time() {
+			var d = new Date();
+			var cur_hour = d.getHours();
+			var cur_min = d.getMinutes();
+			var cur_sec = d.getSeconds();
+
+			if (cur_hour<10) {cur_hour = '0' + cur_hour};
+			if (cur_min<10) {cur_min = '0' + cur_min};
+			if (cur_sec<10) {cur_sec = '0' + cur_sec};
+
+			if (cur_hour==00) {$('#top').css({'font-color':'#ffffff'})};
+
+			cur_hour.toString();
+			cur_min.toString();
+			cur_sec.toString();
+
+			var cur_color = '#' + cur_hour + cur_min + cur_sec;
+			$('#current_time').html('Currently: ' + cur_hour + ':' + cur_min + ':' + cur_sec);
+			$('#current_color').html('#' + cur_hour + cur_min + cur_sec);
+			//$('html').css('background-color', '#'+ cur_hour + cur_min + cur_sec);
+			$('body').css({
+				"background":"-webkit-linear-gradient("+cur_color+", "+bottom_color+")", /* For Safari 5.1 to 6.0 */
+  				"background":"-o-linear-gradient("+cur_color+", "+bottom_color+")", /* For Opera 11.1 to 12.0 */
+  				"background":"-moz-linear-gradient("+cur_color+", "+bottom_color+")", /* For Firefox 3.6 to 15 */
+  				"background":"linear-gradient("+cur_color+", "+bottom_color+")", /* Standard syntax */
+  			});
+
+		}
+
+		setInterval(cur_time, 500);
+
+		function timer_start() {
+			var start_hour = document.getElementById('hours').value;
+			var start_min = document.getElementById('minutes').value;
+			var start_sec = document.getElementById('seconds').value;
+
+			if (!parseInt(start_hour) && parseInt(start_hour) != 0) {alert("Improper input: Not a Number Entered")};
+			if (!parseInt(start_min) && parseInt(start_min) != 0) {alert("Improper input: Not a Number Entered")};
+			if (!parseInt(start_sec) && parseInt(start_sec) != 0) {alert("Improper input: Not a Number Entered")};
+			//alert('working');
+			if (start_hour<10) {start_hour = '0' + start_hour};
+			if (start_min<10) {start_min = '0' + start_min};
+			if (start_sec<10) {start_sec = '0' + start_sec};
+
+			if (start_hour.length>2) {start_hour = start_hour.slice(start_hour.length-2, start_hour.length) };
+			if (start_min.length>2) {start_min = start_min.slice(start_min.length-2, start_min.length) };
+			if (start_sec.length>2) {start_sec = start_sec.slice(start_sec.length-2, start_sec.length) };
+
+			$('#bottom_timer').html('Time Left: ' + start_hour + ':' + start_min + ':' + start_sec);
+			//$('#center').css({"background-color":"rgba(255, 255, 255, 0.2)"});
+			//$('.input').fadeOut();
+
+			var interval = setInterval(function() {
+				if (start_hour == 0 && start_min == 0 && start_sec == 0) {
+				alert("Time's Up!");
+				clearInterval(interval);
+				return;
+			} else if (start_sec == 0 && start_min == 0) {
+				start_hour--;
+				start_sec=59;
+				start_min=59;
+			} else if (start_sec == 0) {
+				start_min--;
+				start_sec = 59;
+			} else {start_sec--};
+
+			start_hour.toString();
+			start_min.toString();
+			start_sec.toString();
+
+			if (start_hour.length==1 || start_hour<10) {start_hour = '0' + start_hour};
+			if (start_min.length==1 || start_min<10) {start_min = '0' + start_min};
+			if (start_sec.length==1 || start_sec<10) {start_sec = '0' + start_sec};
+
+			if (start_hour.length>2) {start_hour = start_hour.slice(start_hour.length-2, start_hour.length) };
+			if (start_min.length>2) {start_min = start_min.slice(start_min.length-2, start_min.length) };
+			if (start_sec.length>2) {start_sec = start_sec.slice(start_sec.length-2, start_sec.length) };
+
+			$('#bottom_timer').html('Time Left: ' + start_hour + ':' + start_min + ':' + start_sec);
+			$('#bottom_color').html('#' + start_hour + start_min + start_sec);
+			
+			bottom_color = '#' + start_hour + start_min + start_sec;
+
+		}, 1000);
+		}
+	</script>
+</head>
+
+<body>
+	<div class="content">
+		
+
+		<div id="top" style="height:16%;">
+			<p id="current_color" style="margin-bottom:-20px; padding-top:20px;">#000000</p>
+			<p id="current_time" style="font-size:28px;line-height:120%;padding:15px;">Loading</p>
+		</div>
+
+	<div id="center" style="">
+		<div class="header">
+			<h1>Color Timer</h1>
+			<p id="subheader" style="margin:-10px;font-size:16px;">by liawesomesaucer</p>
+		</div>
+		<div class=input>
+			<div id="input">
+				<p style="margin-bottom:-5px;font-size:18px">Enter Desired Timer Below:</p>
+			</div>
+
+			<div id="input">
+				<input maxlength="2" id="hours" value="00">hr</input>
+				<p>:</p>
+				<input maxlength="2" id="minutes" value="00">min</input>
+				<p>:</p>
+				<input maxlength="2" id="seconds" value="00">sec</input>
+			</div>
+
+			<div id="input" style="margin-top:5px;">
+				<a href="#" onClick="javascript:timer_start();">Start Timer</a>
+			</div>
+		</div>
+	</div>
+
+		<div id="bottom" style="height:16%;">
+			<p id="bottom_timer" style="font-size:28px;line-height:120%;padding:15px;">Time Left: --:--:--</p>
+			<p id="bottom_color" style="margin-top:-10px;padding-bottom:20px;">#FFFFFF</p>
+		</div>
+
+	</div>
+</body>
