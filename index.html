@@ -135,7 +135,11 @@
 			if (cur_hour<12 && cur_hour>6) {$('#greeting').html("Good morning. What's your deadline?")};
 			if (cur_hour<17 && cur_hour>12) {$('#greeting').html("Good afternoon. What's your deadline?")};
 			if (cur_hour<21 && cur_hour>17) {$('#greeting').html("Good evening. What's your deadline?")};
-		}, 600000);
+		}, 60000);
+		if (cur_hour<6 || cur_hour>21) {$('#greeting').html("Hi. What's your deadline?")};
+		if (cur_hour<12 && cur_hour>6) {$('#greeting').html("Good morning. What's your deadline?")};
+		if (cur_hour<17 && cur_hour>12) {$('#greeting').html("Good afternoon. What's your deadline?")};
+		if (cur_hour<21 && cur_hour>17) {$('#greeting').html("Good evening. What's your deadline?")};
 
 		function timer_start() {
 
