@@ -98,7 +98,7 @@
 	<script>
 
 		//$( "#fb-like" ).hide();
-		var bottom_color = '#ffffff'
+		var bottom_color = '#ffffff';
 
 		function cur_time() {
 			var d = new Date();
@@ -126,10 +126,16 @@
   				"background":"-moz-linear-gradient("+cur_color+", "+bottom_color+")", /* For Firefox 3.6 to 15 */
   				"background":"linear-gradient("+cur_color+", "+bottom_color+")", /* Standard syntax */
   			});
-
 		}
 
 		setInterval(cur_time, 500);
+		setInterval(function() {
+			// Changes greeting message based on time
+			if (cur_hour<6 || cur_hour>21) {$('#greeting').html("Hi. What's your deadline?")};
+			if (cur_hour<12 && cur_hour>6) {$('#greeting').html("Good morning. What's your deadline?")};
+			if (cur_hour<17 && cur_hour>12) {$('#greeting').html("Good afternoon. What's your deadline?")};
+			if (cur_hour<21 && cur_hour>17) {$('#greeting').html("Good evening. What's your deadline?")};
+		}, 600000);
 
 		function timer_start() {
 
@@ -223,7 +229,7 @@
 		</div>
 		<div class=input>
 			<div id="input" class="disappear">
-				<p style="margin-bottom:-5px;font-size:18px">Enter Desired Timer Below:</p>
+				<p id="greeting" style="margin-bottom:-5px;font-size:18px">Hi, what's your deadline?</p>
 			</div>
 
 			<div id="input">
