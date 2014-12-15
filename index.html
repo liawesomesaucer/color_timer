@@ -83,9 +83,8 @@
 
 	<script>
 
+		//$( "#fb-like" ).hide();
 		var bottom_color = '#ffffff'
-
-		//alert('#' + cur_hour + cur_min + cur_sec);
 
 		function cur_time() {
 			var d = new Date();
@@ -119,6 +118,9 @@
 		setInterval(cur_time, 500);
 
 		function timer_start() {
+
+			// Starts the color timer!
+
 			var start_hour = document.getElementById('hours').value;
 			var start_min = document.getElementById('minutes').value;
 			var start_sec = document.getElementById('seconds').value;
@@ -126,7 +128,7 @@
 			if (!parseInt(start_hour) && parseInt(start_hour) != 0) {alert("Improper input: Not a Number Entered")};
 			if (!parseInt(start_min) && parseInt(start_min) != 0) {alert("Improper input: Not a Number Entered")};
 			if (!parseInt(start_sec) && parseInt(start_sec) != 0) {alert("Improper input: Not a Number Entered")};
-			//alert('working');
+			
 			if (start_hour<10) {start_hour = '0' + start_hour};
 			if (start_min<10) {start_min = '0' + start_min};
 			if (start_sec<10) {start_sec = '0' + start_sec};
@@ -136,8 +138,11 @@
 			if (start_sec.length>2) {start_sec = start_sec.slice(start_sec.length-2, start_sec.length) };
 
 			$('#bottom_timer').html('Time Left: ' + start_hour + ':' + start_min + ':' + start_sec);
+			$('#bottom_color').html('#' + start_hour + start_min + start_sec);
+			bottom_color = '#' + start_hour + start_min + start_sec;
 			//$('#center').css({"background-color":"rgba(255, 255, 255, 0.2)"});
-			//$('.input').fadeOut();
+			$('.disappear').delay(0).fadeTo(1000, 0);
+			//$('#fb-like').fadeIn();
 
 			var interval = setInterval(function() {
 				if (start_hour == 0 && start_min == 0 && start_sec == 0) {
@@ -169,13 +174,26 @@
 			$('#bottom_color').html('#' + start_hour + start_min + start_sec);
 			
 			bottom_color = '#' + start_hour + start_min + start_sec;
-
-		}, 1000);
+			}, 1000);
 		}
 	</script>
 </head>
 
 <body>
+<!-- 
+	<div id="fb-root"></div>
+	<script>
+		(function(d, s, id) {
+		  	var js, fjs = d.getElementsByTagName(s)[0];
+		  	if (d.getElementById(id)) return;
+		  	js = d.createElement(s); js.id = id;
+		  	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+		  	fjs.parentNode.insertBefore(js, fjs);
+		}
+		(document, 'script', 'facebook-jssdk'));
+	</script>
+ -->
+
 	<div class="content">
 		
 
@@ -190,7 +208,7 @@
 			<p id="subheader" style="margin:-10px;font-size:16px;">by liawesomesaucer</p>
 		</div>
 		<div class=input>
-			<div id="input">
+			<div id="input" class="disappear">
 				<p style="margin-bottom:-5px;font-size:18px">Enter Desired Timer Below:</p>
 			</div>
 
@@ -202,9 +220,12 @@
 				<input maxlength="2" id="seconds" value="00">sec</input>
 			</div>
 
-			<div id="input" style="margin-top:5px;">
-				<a href="#" onClick="javascript:timer_start();">Start Timer</a>
+			<div id="input" style="margin-top:5px;" class="disappear">
+				<a id="button" href="#" onClick="javascript:timer_start();">Start Timer</a>
 			</div>
+<!-- 
+			<div class="fb-like" data-href="https://liawesomesaucer.github.io/color_timer/index.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+ -->
 		</div>
 	</div>
 
