@@ -12,8 +12,10 @@
 	<style>
 	body {
 		/*overflow:hidden;*/
-		font: 20px/24px Lucida Console, Arial, sans-serif;
-		margin:0;
+		font: 18px/24px Lucida Console, Arial, sans-serif;
+		/*margin:1%;*/
+		margin-left:0;
+		margin-right:0;
 		padding:0;
 		padding-top:3%;
 		text-align:center;
@@ -21,7 +23,7 @@
 		background: -webkit-linear-gradient(#000000, #ffffff); /* For Safari 5.1 to 6.0 */
   		background: -o-linear-gradient(#000000, #ffffff); /* For Opera 11.1 to 12.0 */
   		background: -moz-linear-gradient(#000000, #ffffff); /* For Firefox 3.6 to 15 */
-  		background: linear-gradient(#000000, #ffffff); /* Standard syntax */
+  		background: linear-gradient(#000000, #ffffff) no-repeat center center fixed; /* Standard syntax */
 	}
 	div{
 		margin:0px;
@@ -46,20 +48,26 @@
 		font-size:16px;
 		width:30;
 	}
-	a{
-		color:#000000;
-		font-size:18px;
+	a {
+		color:#ffffff;
 		text-decoration:none;
+	}
+	#button {
+		color:#000000;
+		font-size:16px;
 		border-style:solid;
 		border-width:1px;
 		padding:2px;
 		background-color: rgba(255, 255, 255, 0.2);
 	}
-	a:hover {
+	#button:hover {
 		background-color: rgba(255, 255, 255, 1);
 	}
 	a:visited {
 		color:#000000;
+	}
+	::selection {
+		color:#e6e6e6;
 	}
 	div #top {
 		width:50%;
@@ -124,7 +132,7 @@
 				"background":"-webkit-linear-gradient("+cur_color+", "+bottom_color+")", /* For Safari 5.1 to 6.0 */
   				"background":"-o-linear-gradient("+cur_color+", "+bottom_color+")", /* For Opera 11.1 to 12.0 */
   				"background":"-moz-linear-gradient("+cur_color+", "+bottom_color+")", /* For Firefox 3.6 to 15 */
-  				"background":"linear-gradient("+cur_color+", "+bottom_color+")", /* Standard syntax */
+  				"background":"linear-gradient("+cur_color+", "+bottom_color+") no-repeat center center fixed", /* Standard syntax */
   			});
 		}
 
@@ -196,7 +204,7 @@
 
 			$('#bottom_timer').html('Time Left: ' + start_hour + ':' + start_min + ':' + start_sec);
 			$('#bottom_color').html('#' + start_hour + start_min + start_sec);
-			
+
 			bottom_color = '#' + start_hour + start_min + start_sec;
 			}, 1000);
 		}
@@ -229,7 +237,7 @@
 	<div id="center" style="">
 		<div class="header">
 			<h1>Color Timer</h1>
-			<p id="subheader" style="margin:-10px;font-size:16px;">by liawesomesaucer</p>
+			<p id="subheader" style="margin:-10px;font-size:16px;">by <a style="color:#ffffff;" href="#">liawesomesaucer</a></p>
 		</div>
 		<div class=input>
 			<div id="input" class="disappear">
